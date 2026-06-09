@@ -30,23 +30,32 @@ public class JavaApplication8 {
             }
         }
         System.out.println("\nX = Seleccionada    O = Libre");
-        System.out.println("\tEntrada: S/15");
-        System.out.println("");
+    }
+    
+    public static void welcome(){
+        System.out.println("""
+                            _______________CINESTAR ______________
+                           |                                      |
+                           |    BIENVENIDO A CINESTAR CHIMBOTE    |
+                           |______________________________________|
+                           """);
     }
     
     public static void menu(){
         System.out.println("""
-                            __________ CINESTAR _________
-                           |                             |
-                           |    1. Ver Sala de Asientos  |
-                           |    2. Ver Mi Carrito        |   
-                           |    3. Finalizar             |
-                           |_____________________________|
+                           
+                            ____________CINESTAR ____________
+                           |                                 |
+                           |    1. Ver Asientos Disponibles  |
+                           |    2. Mi Carrito                |   
+                           |    3. Finalizar Compra          |
+                           |_________________________________|
                            """);
-    }
+    }   
     
     public static void menu2(){
         System.out.println("""
+                           
                             __________ CINESTAR _________
                            |                             |
                            |    1. Reservar Asientos     |
@@ -54,17 +63,57 @@ public class JavaApplication8 {
                            |_____________________________|
                            """);
     }
-    public static void enter(Scanner in){
+    public static void menu3(){
+        System.out.println("""
+                           
+                            _______________ CINESTAR _____________
+                           |                                      |
+                           |    1. Continuar Reservando           |
+                           |    2. Editar Selección               |
+                           |    0. Menu Principal                 |   
+                           |______________________________________|
+                           """);
+    }
+    public static void enter(Scanner sc){
         String entrada;
         do {
             System.out.print("Presione ENTER para continuar... ");
-            entrada = in.nextLine();
+            entrada = sc.nextLine();
             if (entrada.length() > 0) {
                 System.out.println("Error!! Solo presionar la tecla ENTER.");
             }
         }while(entrada.length() > 0);
     }
-    
+    public static void carrito(String cliente){
+        System.out.printf("\nHola, %s!\n", cliente);
+        System.out.println("\nRESUMEN DE TU COMPRA");
+        System.out.println("_______________________________");
+        System.out.println("\nAsientos Reservados" );
+        System.out.println("A01, A02                Cant.2 ");
+        System.out.println("-------------------------------");
+        System.out.println("Precio: S/15");
+        System.out.println("Sub-Total: S/");
+        System.out.println("_______________________________\n");
+    }
+    public static void ticket(){
+        System.out.println(" _______________________________________ ");
+        System.out.println("|                                       |");
+        System.out.println("| CINESTAR                              |");
+        System.out.println("|                                       |");
+        System.out.println("| Cine: Cinestar Chimbote               |");
+        System.out.println("| Cliente:                              |");
+        System.out.println("| Asientos: A01, A02                    |");
+        System.out.println("| _____________________________________ |");
+        System.out.println("|                                       |");
+        System.out.println("| Cantidad     Precio        Total      |");
+        System.out.println("| 02           S/15          S/30       |");
+        System.out.println("| ------------------------------------- |");
+        System.out.println("| TOTAL A PAGAR: S/30                   |");
+        System.out.println("|                                       |");
+        System.out.println("| Gracias por su compra :)              |");
+        System.out.println("|_______________________________________|");
+        System.out.println();
+    }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         boolean check = true;
@@ -79,6 +128,10 @@ public class JavaApplication8 {
                 array[i][j] = "O";
             }
         }
+        welcome();
+        System.out.println("A continuacion, ingrese su nombre...");
+        System.out.print("Hola, ");
+        String name = in.next();
         while(check){
             boolean escoger = true;
             menu();
@@ -88,6 +141,7 @@ public class JavaApplication8 {
             switch(option){
                 case 1: 
                     cine(array);
+                    System.out.println();
                     enter(in);
                     do{
                         menu2();
@@ -97,6 +151,7 @@ public class JavaApplication8 {
                             case 0: System.out.println(); break;
                             case 1:
                                 cine(array);
+                                System.out.println("\tEntrada: S/15\n");
                                 while(escoger){
                                     do{
                                         System.out.print("Ingrese numero de fila: ");
@@ -124,10 +179,13 @@ public class JavaApplication8 {
                     }while(option>1 || option <0);
                     break;
                 case 2:
-                    System.out.println("Viendo carrito..."); break;
+                    carrito(name);
+                    enter(in);
+                    break;
                 case 3:
                     check = false;
-                    System.out.println("Vuelve Pronto!!"); break;
+                    ticket();
+                    break;
                 default: 
                     System.out.println("Por favor, ingrese una opcion valida..."); break;
             }
