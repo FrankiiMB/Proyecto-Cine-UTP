@@ -1,8 +1,7 @@
 package CineProyect;
-import java.util.Scanner;
 public class View {
     private char word;
-
+    
     public void asientos(String[][] array) {
         word = 'G';
         System.out.printf("\n%20s\n", "PANTALLA");
@@ -11,7 +10,7 @@ public class View {
         System.out.print("|");
         System.out.println("\n");
         
-        //Impresion de asientos vacios y asignación de letras a las columnas
+        //Asignación de letras a las filas
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 10; j++) {
                 System.out.print(array[i][j] + "  ");
@@ -19,7 +18,7 @@ public class View {
             word = (char) ('G' - i);
             System.out.println(word);
         }
-        //Numero de columna
+        //Numero de columnas 10, 09, 08,....
         for (int i = 10; i > 0; i--) {
             System.out.print((i >= 10 ? i : "0" + i) + " ");
         }
@@ -70,23 +69,15 @@ public class View {
                            """);
     }
 
-    public void enter(Scanner sc) {
-        String entrada;
-        do {
-            System.out.print("Presione ENTER para continuar... ");
-            entrada = sc.nextLine();
-        } while (entrada.length() > 0);
-    }
-
-    public void carrito(String cliente){
+    public void carrito(String cliente, int asientosReservados, double price, double subTotal){
         System.out.printf("\nHola, %s!\n", cliente);
         System.out.println("\nRESUMEN DE TU COMPRA");
         System.out.println("_______________________________");
         System.out.println("\nAsientos Reservados" );
-        System.out.println("A01, A02                Cant.2 ");
+        System.out.printf("A01, A02                Cant.%d\n", asientosReservados );
         System.out.println("-------------------------------");
-        System.out.println("Precio: S/15");
-        System.out.println("Sub-Total: S/");
+        System.out.printf("Precio: S/%.2f\n", price);
+        System.out.printf("Sub-Total: S/%.2f\n", subTotal);
         System.out.println("_______________________________\n");
     }
     

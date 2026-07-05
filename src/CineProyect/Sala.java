@@ -1,40 +1,40 @@
 package CineProyect;
 public class Sala{
-    private String[][] asientos;
-    private int filas = 7;
-    private int columnas= 10;
+    private final String[][] ASIENTOS;
+    private final int FILAS = 7;
+    private final int COLUMNAS = 10;
     private double price = 15.0;
 
     //Impresion de asientos vacios
     public Sala() {
-        asientos = new String[7][10];
+        this.ASIENTOS = new String[7][10];
         for(int i = 0; i<7; i++){
             for(int j = 0; j<10; j++){
-                asientos[i][j] = "O";
+                this.ASIENTOS[i][j] = "O";
             }
         }
     }
 
     public String[][] getAsientos() {
-        return asientos;
+        return ASIENTOS;
     }
     
     //Asientos reservados
-    public int cantidadReservados() {
-        int contador = 0;
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                if (asientos[i][j].equals("X")) contador++;
+    public int getTotalReservados() {
+        int totalReservados = 0;
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                if (ASIENTOS[i][j].equals("X")) totalReservados++;
             }
         }
-        return contador;
-    }
-
-    public double subTotal() {
-        return cantidadReservados() * price;
+        return totalReservados;
     }
     
-    public double price() {
+    public double getSubTotal() {
+        return getTotalReservados() * price;
+    }
+    
+    public double getPrice() {
         return price;
     }
 }
