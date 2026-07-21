@@ -18,7 +18,7 @@ public class Control {
                 System.out.println(View.COLOR_ROJO_NEGRITA + "Solo se permite el ingreso de letras..." + View.COLOR_NORMAL);
             } else {
                 String[] palabras = nombre.toLowerCase().split(" ");
-                String nombreFormateado = " ";
+                String nombreFormateado = "";
                 for (String palabra : palabras) {
                     nombreFormateado += palabra.substring(0, 1).toUpperCase() + palabra.substring(1) + " ";
                 }
@@ -89,7 +89,7 @@ public class Control {
     
     //By: Owen && Frank
     
-    public static int[] elegirAsiento(Scanner in) {
+    public static int[] elegirAsiento(Scanner in, Sala sala) {
         String fila = "";
         int filaConvertida;
         do {
@@ -103,7 +103,7 @@ public class Control {
 
         int columna;
         do {
-            String msgColumna = "Ingrese indice de columna (1-10): ";
+            String msgColumna = "Ingrese indice de columna (1-" + sala.getColumnas() + "): ";
             System.out.print(msgColumna);
             columna = validarNumero(in, msgColumna);
             if (columna < 1 || columna > 10) {
@@ -111,7 +111,7 @@ public class Control {
             }
         } while (columna < 1 || columna > 10);
 
-        int columnaConvertida = 10 - columna;
+        int columnaConvertida = sala.getColumnas() - columna;
 
         return new int[]{filaConvertida, columnaConvertida};
     }
@@ -155,7 +155,7 @@ public class Control {
         while (contadorAsientos < cantidadAsientos) {
             System.out.println("\n--- Reservando asiento " + (contadorAsientos + 1) + " de " + cantidadAsientos + " ---");
 
-            int[] indices = elegirAsiento(in);
+            int[] indices = elegirAsiento(in, sala);
             int filaConvertida = indices[0];
             int columnaConvertida = indices[1];
 
@@ -193,7 +193,7 @@ public class Control {
     
     public static void borrarAsiento(Scanner in, Sala sala) {
 
-        int[] indices = elegirAsiento(in);
+        int[] indices = elegirAsiento(in, sala);
         int filaConvertida = indices[0];
         int columnaConvertida = indices[1];
         
